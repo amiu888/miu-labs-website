@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Miu Labs Website — SnaptabAI
 
-## Getting Started
+Marketing website for [SnaptabAI](https://miulabs.app), the AI-powered receipt scanning and bill splitting iOS app by Miu Labs.
 
-First, run the development server:
+**Live site:** https://miulabs.app  
+**GitHub:** https://github.com/amiu888/miu-labs-website
+
+---
+
+## Stack
+
+- [Next.js 16](https://nextjs.org) — React framework (static export)
+- TypeScript
+- [Tailwind CSS v4](https://tailwindcss.com)
+- [shadcn/ui](https://ui.shadcn.com) (Base UI variant)
+- [lucide-react](https://lucide.dev)
+- Hosted on [Cloudflare Pages](https://pages.cloudflare.com)
+
+---
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Landing page — hero, features, how it works, download CTA |
+| `/privacy` | Privacy Policy |
+| `/support` | Support FAQ + contact |
+
+---
+
+## Local Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+The site is deployed to **Cloudflare Pages** using `wrangler` CLI directly (not the Cloudflare Git integration — see note below).
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js 22+
+- `wrangler` CLI (installed automatically via `npx`)
+- Cloudflare account with the `miu-labs-website` Pages project created
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Deploy
 
-## Deploy on Vercel
+```bash
+# 1. Build the static site
+npm run build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 2. Deploy the out/ directory to Cloudflare Pages
+npx wrangler pages deploy out --project-name=miu-labs-website
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Wrangler will prompt you to log in to Cloudflare on first use. After that it uses cached credentials.
+
+Each deploy outputs a unique preview URL like:
+```
+https://xxxxxxxx.miu-labs-website.pages.dev
+```
+
+The production domain `miulabs.app` is set as a custom domain on the Pages project and updates automatically after each deploy.
+
+### Why not the Cloudflare Git integration?
+
+Cloudflare Pages auto-detects Next.js from `package.json` and runs `opennextjs-cloudflare` as a deploy adapter — even when the framework preset is set to "None" in the dashboard. That adapter requires `output: 'standalone'` but this site uses `output: 'export'` (fully static). The Git integration consistently fails as a result.
+
+The `wrangler pages deploy` CLI approach bypasses Cloudflare's build system entirely: we build locally and upload the pre-built `out/` folder directly.
+
+---
+
+## Custom Domain
+
+`miulabs.app` is configured as a custom domain on the Cloudflare Pages project. Since the domain is already on Cloudflare DNS, the DNS record was added automatically.
+
+To update URLs (e.g. App Store link), search for `apps.apple.com` in the codebase and replace with the real URL.
+
+---
+
+## Things to Update Before Launch
+
+- [ ] Replace App Store URL — search `apps.apple.com` in the code
+- [ ] Add real app screenshot to replace the icon placeholder in the hero
+- [ ] Update contact emails if different from `support@miulabs.com` / `privacy@miulabs.com`

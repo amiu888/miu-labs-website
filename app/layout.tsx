@@ -13,22 +13,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://miulabs.app"),
   title: "SnaptabAI — Scan Receipts & Split Bills Instantly",
   description:
     "SnaptabAI uses AI to scan receipts, extract line items, and split bills with friends — all on your device. By Miu Labs.",
   keywords: ["receipt scanner", "bill splitter", "expense tracker", "AI", "iOS app"],
   authors: [{ name: "Miu Labs" }],
+  icons: {
+    icon: "/ReceiptSplit_AppIcon_1024.png",
+    apple: "/ReceiptSplit_AppIcon_1024.png",
+  },
   openGraph: {
     title: "SnaptabAI — Scan Receipts & Split Bills Instantly",
     description:
       "AI-powered receipt scanning and bill splitting for iOS. Snap a photo, split the bill.",
     type: "website",
     siteName: "SnaptabAI by Miu Labs",
+    images: [{ url: "/ReceiptSplit_AppIcon_1024.png", width: 1024, height: 1024 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "SnaptabAI — Scan Receipts & Split Bills Instantly",
     description: "AI-powered receipt scanning and bill splitting for iOS.",
+    images: ["/ReceiptSplit_AppIcon_1024.png"],
   },
 };
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { buttonVariants } from "@/components/ui/button";
@@ -5,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import {
-  ScanLine,
   Users,
   PiggyBank,
   Sparkles,
@@ -127,19 +127,47 @@ export default function Home() {
             </a>
           </div>
 
-          {/* App preview placeholder */}
-          <div className="mt-16 flex justify-center">
-            <div className="relative">
-              <div className="w-[260px] h-[520px] rounded-[40px] border-[8px] border-foreground/10 bg-gradient-to-br from-primary/10 via-accent/30 to-background shadow-2xl shadow-primary/10 flex items-center justify-center">
-                <div className="text-center space-y-3 px-8">
-                  <div className="w-16 h-16 rounded-2xl bg-primary mx-auto flex items-center justify-center">
-                    <ScanLine className="w-8 h-8 text-primary-foreground" />
-                  </div>
-                  <p className="text-sm font-medium text-muted-foreground">SnaptabAI</p>
-                  <p className="text-xs text-muted-foreground/70">Screenshot coming soon</p>
-                </div>
+          {/* App screenshots */}
+          <div className="mt-16 flex items-end justify-center gap-4 px-4">
+            {/* Left phone — slightly smaller and lower */}
+            <div className="hidden sm:block relative shrink-0 translate-y-6 opacity-80">
+              <div className="w-[180px] rounded-[28px] border-[6px] border-foreground/10 overflow-hidden shadow-xl shadow-primary/10 bg-white">
+                <Image
+                  src="/screenshots/receipts.png"
+                  alt="Receipts screen"
+                  width={393}
+                  height={852}
+                  className="w-full h-auto"
+                />
               </div>
-              <div className="absolute -inset-4 -z-10 rounded-[50px] bg-primary/5 blur-2xl" />
+            </div>
+
+            {/* Center phone — main, full size */}
+            <div className="relative shrink-0 z-10">
+              <div className="w-[220px] sm:w-[240px] rounded-[34px] border-[7px] border-foreground/10 overflow-hidden shadow-2xl shadow-primary/20 bg-white">
+                <Image
+                  src="/screenshots/dashboard.png"
+                  alt="Dashboard screen"
+                  width={393}
+                  height={852}
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
+              <div className="absolute -inset-4 -z-10 rounded-[44px] bg-primary/8 blur-2xl" />
+            </div>
+
+            {/* Right phone — Split Calculator */}
+            <div className="hidden sm:block relative shrink-0 translate-y-6 opacity-80">
+              <div className="w-[180px] rounded-[28px] border-[6px] border-foreground/10 overflow-hidden shadow-xl shadow-primary/10 bg-white">
+                <Image
+                  src="/screenshots/add_receipt.png"
+                  alt="Add Receipt screen"
+                  width={393}
+                  height={852}
+                  className="w-full h-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
